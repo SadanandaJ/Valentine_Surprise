@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(to bottom, #ffccdd, #ffe6f2);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 20px;
+    color: #cc0066;
+}
+
+img {
+    width: 85%;
+    max-width: 400px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 20px pink;
+}
+
+#poem {
+    font-size: 22px;
+    color: #99004d;
+    margin: 20px;
+    white-space: pre-line;
+}
+
+button {
+    padding: 12px 25px;
+    font-size: 18px;
+    background: #ff3399;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #cc0066;
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    color: red;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Happy Valentine's Day ❤️</h1>
+
+<img id="slide" src="photo1.jpg">
+<div id="poem"></div>
+
+<button onclick="startSurprise()">Click Here My Love ❤️</button>
+
+<audio id="bgMusic" src="music.mp3" loop></audio>
+
+<script>
+const images = ["photo1.jpg", "photo2.jpg", "photo3.jpg"];
+
+const poems = [
+"ನವಿಲುಗರಿಯೊಂದು ಜೀವ ತುಂಬಿಕೊಂಡು ನಡೆದು ಬಂದಿದೆ 💕",
+"ಆ ಕಡಲ ಕಣ್ಣರಳಿಸಿ ತುಸು ನಾಚಿ ನಿಂತು ತಾ ಹೆಣ್ಣು ಅಂದಿದೆ,\nಇರಬಹುದಾ ಇವಳೇನೇ ಆ ಮಳೆಬಿಲ್ಲಿನ ಮಗಳು❤️",
+"ದೇವಲೋಕದ ಅಪ್ಸರೆಯಂತೆ ಕಣ್ಣೆದುರಿಗೆ ಬಂದಳು,\nಮನಸ್ಸಿಗೆ ಮೆಲ್ಲನೆ ತನ್ನ ಪರಿಚಯ ಹೇಳಿದಳು.. 💖"
+];
+
+let index = 0;
+let started = false;
+
+function startSurprise() {
+    if (!started) {
+        document.getElementById("bgMusic").play();
+        showSlide();
+        createHearts();
+        started = true;
+    }
+}
+
+function showSlide() {
+    document.getElementById("slide").src = images[index];
+    document.getElementById("poem").innerText = poems[index];
+    index = (index + 1) % images.length;
+    setTimeout(showSlide, 4000);
+}
+
+function createHearts() {
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 500);
+}
+</script>
+
+</body>
+</html>
